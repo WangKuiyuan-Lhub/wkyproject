@@ -223,8 +223,8 @@ sm3_pad_message:
 	lw	a4,-20(s0)
 	li	a5,119
 	ble	a4,a5,.L15
-.L13:				#reverse  part
-#	lw	a5,-24(s0) use a0 to save the constant -24(s0)
+.L13:
+	#	lw	a5,-24(s0) use a0 to save the constant -24(s0)
 	lw  a0,-24(s0)
 #	srli	a3,a5,24
 #	srli	a3,a0,24
@@ -361,9 +361,8 @@ sm3_group_a:
 #	slli	a3,a5,15
 #	srli	a5,a5,17
 #	or	a5,a5,a3
-
-	li a6,15
-	.insn r 0x33,1,2, a3,a5,a6
+	li a3,15
+	.insn r 0x33,1,2,a5,a5,a3
 
 	xor	a4,a4,a5
 	lw	a3,-40(s0)
@@ -374,35 +373,36 @@ sm3_group_a:
 #	slli	a2,a5,15
 #	srli	a5,a5,17
 #	or	a5,a5,a2
+	li a2,15
+	.insn r 0x33,1,2,a5,a5,a2
 
-	.insn r 0x33,1,2, a5,a5,a6
 	xor	a5,a3,a5
 
 #	slli	a3,a5,15
 #	srli	a5,a5,17
 #	or	a5,a5,a3
-
-	.insn r 0x33,1,2, a5,a5,a6
+	li a3,15
+	.insn r 0x33,1,2,a5,a5,a3
 
 	xor	a4,a4,a5
 	lw	a3,-40(s0)
 	lw	a5,-36(s0)
 	xor	a3,a3,a5
 	lw	a5,-32(s0)
+
 #	slli	a2,a5,15
 #	srli	a5,a5,17
 #	or	a5,a5,a2
-
-	.insn r 0x33,1,2, a5,a5,a6
+	li a2,15
+	.insn r 0x33,1,2,a5,a5,a2
 
 	xor	a5,a3,a5
 
 #	srli	a3,a5,9
 #	slli	a5,a5,23
 #	or	a5,a5,a3
-
-	li a7,9
-	.insn r 0x33,2,2, a5,a5,a7
+	li a3,23
+	.insn r 0x33,1,2,a5,a5,a3
 
 	xor	a4,a4,a5
 	lw	a5,-28(s0)
@@ -410,9 +410,8 @@ sm3_group_a:
 #	slli	a3,a5,7
 #	srli	a5,a5,25
 #	or	a5,a5,a3
-
-	li a7,7
-	.insn r 0x33,2,2, a5,a5,a7
+	li a3,7
+	.insn r 0x33,1,2,a5,a5,a3
 
 	xor	a4,a4,a5
 	lw	a5,-24(s0)
@@ -513,20 +512,13 @@ sm3_str_group:
 .L24:
 	addi	a4,s0,-368
 	lw	a5,-24(s0)
-#	slli	a5,a5,2
-#	add	a4,a4,a5
-
-	.insn r 0x33, 5,2,a4,a4,a5
-
-#	lw	a5,-24(s0)
-#	slli	a5,a5,2
-#	mv	a3,a5
-#	addi	a5,s0,-96
-#	add	a5,a5,a3
-
-	addi a3,s0,-96
-	.insn r 0x33, 5,2,a5,a3,a5
-
+	slli	a5,a5,2
+	add	a4,a4,a5
+	lw	a5,-24(s0)
+	slli	a5,a5,2
+	mv	a3,a5
+	addi	a5,s0,-96
+	add	a5,a5,a3
 	li	a2,4
 	mv	a1,a5
 	mv	a0,a4
@@ -545,50 +537,32 @@ sm3_str_group:
 	lw	a5,-24(s0)
 	addi	a5,a5,-16
 	addi	a4,s0,-368
-#	slli	a5,a5,2
-#	add	a0,a4,a5
-
-	.insn r 0x33, 5,2,a0,a4,a5
-
+	slli	a5,a5,2
+	add	a0,a4,a5
 	lw	a5,-24(s0)
 	addi	a5,a5,-9
-#	addi	a4,s0,-368	#a4和之前没变化
-#	slli	a5,a5,2
-#	add	a1,a4,a5
-
-	.insn r 0x33, 5,2,a1,a4,a5
-
+	addi	a4,s0,-368
+	slli	a5,a5,2
+	add	a1,a4,a5
 	lw	a5,-24(s0)
 	addi	a5,a5,-3
-#	addi	a4,s0,-368  #a4和之前没变化
-#	slli	a5,a5,2
-#	add	a2,a4,a5
-
-	.insn r 0x33, 5,2,a2,a4,a5
-
+	addi	a4,s0,-368
+	slli	a5,a5,2
+	add	a2,a4,a5
 	lw	a5,-24(s0)
 	addi	a5,a5,-13
-#	addi	a4,s0,-368	#a4和之前没变化
-#	slli	a5,a5,2
-#	add	a3,a4,a5
-
-	.insn r 0x33, 5,2,a3,a4,a5
-
+	addi	a4,s0,-368
+	slli	a5,a5,2
+	add	a3,a4,a5
 	lw	a5,-24(s0)
 	addi	a5,a5,-6
-#	addi	a4,s0,-368	#a4和之前没变化
-#	slli	a5,a5,2
-#	add	a6,a4,a5
-
-	.insn r 0x33, 5,2,a6,a4,a5
-
-#	addi	a4,s0,-368	#a4和之前没变化
+	addi	a4,s0,-368
+	slli	a5,a5,2
+	add	a6,a4,a5
+	addi	a4,s0,-368
 	lw	a5,-24(s0)
-#	slli	a5,a5,2
-#	add	a5,a4,a5
-
-	.insn r 0x33, 5,2,a5,a4,a5
-
+	slli	a5,a5,2
+	add	a5,a4,a5
 	mv	a4,a6
 	call	sm3_group_a
 	lw	a5,-24(s0)
@@ -608,19 +582,13 @@ sm3_str_group:
 .L28:
 	addi	a4,s0,-368
 	lw	a5,-24(s0)
-#	slli	a5,a5,2
-#	add	a3,a4,a5
-
-	.insn r 0x33, 5,2,a3,a4,a5
-
-#	lw	a5,-24(s0)
+	slli	a5,a5,2
+	add	a3,a4,a5
+	lw	a5,-24(s0)
 	addi	a5,a5,4
-#	addi	a4,s0,-368
-#	slli	a5,a5,2
-#	add	a5,a4,a5
-
-	.insn r 0x33, 5,2,a5,a4,a5
-
+	addi	a4,s0,-368
+	slli	a5,a5,2
+	add	a5,a4,a5
 	addi	a4,s0,-96
 	mv	a2,a4
 	mv	a1,a5
@@ -637,11 +605,8 @@ sm3_str_group:
 	add	a3,a4,a5
 	addi	a4,s0,-368
 	lw	a5,-24(s0)
-#	slli	a5,a5,2
-#	add	a5,a4,a5
-
-	.insn r 0x33, 5,2,a5,a4,a5
-
+	slli	a5,a5,2
+	add	a5,a4,a5
 	li	a2,4
 	mv	a1,a5
 	mv	a0,a3
@@ -752,20 +717,14 @@ sm3_str_summ:
 .L34:
 	addi	a4,s0,-540
 	lw	a5,-24(s0)
-#	slli	a5,a5,2
-#	add	a3,a4,a5
-
-	.insn r 0x33, 5,2,a3,a4,a5
-
-	lw	a6,-20(s0)
-	slli	a6,a6,9
-#	mv	a4,a6
-#	lw	a5,-24(s0)
-#	slli	a5,a5,2
-#	add	a5,a4,a5
-
-	.insn r 0x33, 5,2,a5,a6,a5
-
+	slli	a5,a5,2
+	add	a3,a4,a5
+	lw	a5,-20(s0)
+	slli	a5,a5,9
+	mv	a4,a5
+	lw	a5,-24(s0)
+	slli	a5,a5,2
+	add	a5,a4,a5
 	lw	a4,-644(s0)
 	add	a5,a4,a5
 	li	a2,4
@@ -799,17 +758,11 @@ sm3_str_summ:
 	j	.L35
 .L36:
 	lw	a5,-24(s0)
-#	slli	a5,a5,1
-#	addi	a5,a5,1
-
-	.insn r 0x33, 6,2,a5,a5,a5
-
+	slli	a5,a5,1
+	addi	a5,a5,1
 	addi	a4,s0,-540
-#	slli	a5,a5,2
-#	add	a5,a4,a5
-
-	.insn r 0x33, 5,2,a5,a4,a5
-
+	slli	a5,a5,2
+	add	a5,a4,a5
 	mv	a0,a5
 	call	sm3_str_to_long
 	mv	a5,a0
@@ -817,11 +770,8 @@ sm3_str_summ:
 	lw	a5,-24(s0)
 	slli	a5,a5,1
 	addi	a4,s0,-540
-#	slli	a5,a5,2
-#	add	a5,a4,a5
-
-	.insn r 0x33, 5,2,a5,a4,a5
-
+	slli	a5,a5,2
+	add	a5,a4,a5
 	mv	a0,a5
 	call	sm3_str_to_long
 	mv	a5,a0
@@ -838,43 +788,37 @@ sm3_str_summ:
 #	slli	a4,a5,12
 #	srli	a5,a5,20
 #	or	a5,a5,a4
-
-	li a6,12
-	.insn r 0x33,1,2, a5,a5,a6;
+	li a4,12
+	.insn r 0x33,1,2,a5,a5,a4
 
 	lw	a4,-556(s0)
 	add	a5,a5,a4
 	lw	a4,-24(s0)
-#	li	a2,2043428864
-	li	a0,2043428864
-	addi	a2,a0,1305
+	li	a2,2043428864
+	addi	a2,a2,1305
 	sll	a2,a2,a4
 	li	a1,32
-#	lw	a4,-24(s0)
+	lw	a4,-24(s0)
 	sub	a4,a1,a4
-#	li	a1,2043428864
-	addi	a1,a0,1305
+	li	a1,2043428864
+	addi	a1,a1,1305
 	sra	a4,a1,a4
-#	or	a4,a2,a4
-#	add	a5,a5,a4
-
-	.insn r 0x33,7,2, a5,a2,a4
+	or	a4,a2,a4
+	add	a5,a5,a4
 
 #	slli	a2,a5,7
 #	srli	a4,a5,25
 #	or	a4,a4,a2
-
-	li a6,7
-	.insn r 0x33,1,2, a4,a5,a6
+	li a2,7
+	.insn r 0x33,1,2,a4,a5,a2
 
 	lw	a5,-572(s0)
 
 #	slli	a2,a5,12
 #	srli	a5,a5,20
 #	or	a5,a5,a2
-
-	li a6,12
-	.insn r 0x33,1,2, a5,a5,a6
+	li a2,12
+	.insn r 0x33,1,2,a5,a5,a2
 
 	xor	a5,a4,a5
 	add	a4,a3,a5
@@ -893,32 +837,29 @@ sm3_str_summ:
 #	slli	a3,a5,12
 #	srli	a5,a5,20
 #	or	a5,a5,a3
-
-	.insn r 0x33,1,2, a5,a5,a6
+	li a3,12
+	.insn r 0x33,1,2,a5,a5,a3
 
 	lw	a3,-556(s0)
 	add	a5,a5,a3
 	lw	a3,-24(s0)
-#	li	a2,2043428864  #a0:2043428864
-	addi	a2,a0,1305
+	li	a2,2043428864
+	addi	a2,a2,1305
 	sll	a2,a2,a3
 	li	a1,32
-#	lw	a3,-24(s0)
+	lw	a3,-24(s0)
 	sub	a3,a1,a3
-#	li	a1,2043428864
-	addi	a1,a0,1305
+	li	a1,2043428864
+	addi	a1,a1,1305
 	sra	a3,a1,a3
-#	or	a3,a2,a3
-#	add	a5,a5,a3
-
-	.insn r 0x33,7,2, a5,a2,a3
+	or	a3,a2,a3
+	add	a5,a5,a3
 
 #	slli	a3,a5,7
 #	srli	a5,a5,25
 #	or	a5,a5,a3
-
-	li a6,7
-	.insn r 0x33,1,2, a5,a5,a6
+	li a3,7
+	.insn r 0x33,1,2,a5,a5,a3
 
 	add	a4,a4,a5
 	lw	a5,-632(s0)
@@ -931,9 +872,8 @@ sm3_str_summ:
 #	srli	a4,a5,13
 #	slli	a5,a5,19
 #	or	a5,a5,a4
-
-	li a6,13
-	.insn r 0x33,2,2, a5,a5,a6
+	li a4,19
+	.insn r 0x33,1,2,a5,a5,a4
 
 	sw	a5,-548(s0)
 	lw	a5,-556(s0)
@@ -944,9 +884,8 @@ sm3_str_summ:
 #	slli	a3,a5,9
 #	srli	a5,a5,23
 #	or	a5,a5,a3
-
-	li a6,9
-	.insn r 0x33,1,2, a5,a5,a6
+	li a3,9
+	.insn r 0x33,1,2,a5,a5,a3
 
 	xor	a4,a4,a5
 	lw	a5,-624(s0)
@@ -954,9 +893,8 @@ sm3_str_summ:
 #	srli	a3,a5,15
 #	slli	a5,a5,17
 #	or	a5,a5,a3
-
-	li a6,15
-	.insn r 0x33,2,2, a5,a5,a6
+	li a3,17
+	.insn r 0x33,1,2,a5,a5,a3
 
 	xor	a5,a4,a5
 	sw	a5,-556(s0)
@@ -964,12 +902,10 @@ sm3_str_summ:
 	sw	a5,-560(s0)
 	lw	a5,-568(s0)
 
-#	slli	a4,a5,9
 #	srli	a5,a5,23
 #	or	a5,a5,a4
-
-	li a6,9
-	.insn r 0x33,1,2, a5,a5,a6
+	li a3,9
+	.insn r 0x33,1,2,a5,a5,a3
 
 	sw	a5,-564(s0)
 	lw	a5,-572(s0)
@@ -988,17 +924,11 @@ sm3_str_summ:
 	j	.L37
 .L38:
 	lw	a5,-24(s0)
-#	slli	a5,a5,1
-#	addi	a5,a5,1
-
-	.insn r 0x33, 6,2,a5,a5,a5
-
+	slli	a5,a5,1
+	addi	a5,a5,1
 	addi	a4,s0,-540
-#	slli	a5,a5,2
-#	add	a5,a4,a5
-
-	.insn r 0x33, 5,2,a5,a4,a5
-
+	slli	a5,a5,2
+	add	a5,a4,a5
 	mv	a0,a5
 	call	sm3_str_to_long
 	mv	a5,a0
@@ -1006,11 +936,8 @@ sm3_str_summ:
 	lw	a5,-24(s0)
 	slli	a5,a5,1
 	addi	a4,s0,-540
-#	slli	a5,a5,2
-#	add	a5,a4,a5
-
-	.insn r 0x33, 5,2,a5,a4,a5
-
+	slli	a5,a5,2
+	add	a5,a4,a5
 	mv	a0,a5
 	call	sm3_str_to_long
 	mv	a5,a0
@@ -1018,11 +945,8 @@ sm3_str_summ:
 	lw	a4,-572(s0)
 	lw	a3,-568(s0)
 	lw	a5,-564(s0)
-#	or	a5,a3,a5
-#	and	a4,a4,a5
-
-	.insn r 0x33,7,2, a4,a3,a5
-
+	or	a5,a3,a5
+	and	a4,a4,a5
 	lw	a3,-568(s0)
 	lw	a5,-564(s0)
 	and	a5,a3,a5
@@ -1034,9 +958,8 @@ sm3_str_summ:
 #	slli	a4,a5,12
 #	srli	a5,a5,20
 #	or	a5,a5,a4
-
-	li a6,12
-	.insn r 0x33,1,2, a5,a5,a6
+	li a4,12
+	.insn r 0x33,1,2,a5,a5,a4
 
 	lw	a4,-556(s0)
 	add	a5,a5,a4
@@ -1050,26 +973,22 @@ sm3_str_summ:
 	li	a1,2055708672
 	addi	a1,a1,-630
 	sra	a4,a1,a4
-#	or	a4,a2,a4
-#	add	a5,a5,a4
-
-	.insn r 0x33,7,2, a5,a2,a4
+	or	a4,a2,a4
+	add	a5,a5,a4
 
 #	slli	a2,a5,7
 #	srli	a4,a5,25
 #	or	a4,a4,a2
-
-	li a6,7
-	.insn r 0x33,1,2, a4,a5,a6
+	li a2,7
+	.insn r 0x33,1,2,a4,a5,a2
 
 	lw	a5,-572(s0)
 
 #	slli	a2,a5,12
 #	srli	a5,a5,20
 #	or	a5,a5,a2
-
-	li a6, 12
-	.insn r 0x33,1,2, a5,a5,a6
+	li a2,12
+	.insn r 0x33,1,2,a5,a5,a2
 
 	xor	a5,a4,a5
 	add	a4,a3,a5
@@ -1079,14 +998,12 @@ sm3_str_summ:
 	lw	a4,-556(s0)
 	lw	a5,-552(s0)
 	and	a4,a4,a5
-	lw	a5,-556(s0)
-	lw	a7,-548(s0)
 
+	lw	a3,-556(s0)
 #	not	a3,a5
-#	lw	a5,-548(s0)
+	lw	a5,-548(s0)
 #	and	a5,a3,a5
-
-	.insn r 0x33,4,2, a5,a5,a7
+	.insn r 0x33,4,2,a5,a3,a5
 
 	or	a4,a4,a5
 	lw	a5,-544(s0)
@@ -1096,9 +1013,8 @@ sm3_str_summ:
 #	slli	a3,a5,12
 #	srli	a5,a5,20
 #	or	a5,a5,a3
-
-	
-	.insn r 0x33,1,2, a5,a5,a6
+	li a3,12
+	.insn r 0x33,1,2,a5,a5,a3
 
 	lw	a3,-556(s0)
 	add	a5,a5,a3
@@ -1112,17 +1028,14 @@ sm3_str_summ:
 	li	a1,2055708672
 	addi	a1,a1,-630
 	sra	a3,a1,a3
-#	or	a3,a2,a3
-#	add	a5,a5,a3
-
-	.insn r 0x33,7,2, a5,a2,a3
+	or	a3,a2,a3
+	add	a5,a5,a3
 
 #	slli	a3,a5,7
 #	srli	a5,a5,25
 #	or	a5,a5,a3
-
-	li a6,7
-	.insn r 0x33,1,2, a5,a5,a6
+	li a3,7
+	.insn r 0x33,1,2,a5,a5,a3
 
 	add	a4,a4,a5
 	lw	a5,-632(s0)
@@ -1135,9 +1048,8 @@ sm3_str_summ:
 #	srli	a4,a5,13
 #	slli	a5,a5,19
 #	or	a5,a5,a4
-
-	li a6,13
-	.insn r 0x33,2,2, a5,a5,a6
+	li a4,19
+	.insn r 0x33,1,2,a5,a5,a4
 
 	sw	a5,-548(s0)
 	lw	a5,-556(s0)
@@ -1148,9 +1060,8 @@ sm3_str_summ:
 #	slli	a3,a5,9
 #	srli	a5,a5,23
 #	or	a5,a5,a3
-
-	li a6,9
-	.insn r 0x33,1,2, a5,a5,a6
+	li a3,9
+	.insn r 0x33,1,2,a5,a5,a3
 
 	xor	a4,a4,a5
 	lw	a5,-624(s0)
@@ -1158,9 +1069,8 @@ sm3_str_summ:
 #	srli	a3,a5,15
 #	slli	a5,a5,17
 #	or	a5,a5,a3
-
-	li a6,15
-	.insn r 0x33,2,2, a5,a5,a6
+	li a3,17
+	.insn r 0x33,1,2,a5,a5,a3
 
 	xor	a5,a4,a5
 	sw	a5,-556(s0)
@@ -1171,9 +1081,8 @@ sm3_str_summ:
 #	slli	a4,a5,9
 #	srli	a5,a5,23
 #	or	a5,a5,a4
-
-	li a6,9
-	.insn r 0x33,1,2, a5,a5,a6
+	li a4,9
+	.insn r 0x33,1,2,a5,a5,a4
 
 	sw	a5,-564(s0)
 	lw	a5,-572(s0)

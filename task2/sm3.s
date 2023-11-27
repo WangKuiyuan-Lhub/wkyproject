@@ -483,8 +483,11 @@ sm3_str_group:
 .L24:
 	addi	a4,s0,-368
 	lw	a5,-24(s0)
-	slli	a5,a5,2
-	add	a4,a4,a5
+#	slli	a5,a5,2
+#	add	a4,a4,a5
+
+	.insn r 0x33, 5, 2, a4, a4, a5
+
 	lw	a5,-24(s0)
 	slli	a5,a5,2
 	mv	a3,a5
