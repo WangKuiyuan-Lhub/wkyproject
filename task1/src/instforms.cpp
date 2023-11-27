@@ -123,6 +123,36 @@ RFormInst::encodeSl1Add1(unsigned rdv, unsigned rs1v, unsigned rs2v)
   return true;
 }
 
+// bool
+// RFormInst::encodeSl3Add(unsigned rdv, unsigned rs1v, unsigned rs2v)
+// {
+//   /* INSERT YOUR CODE FROM HERE */
+//   if (rdv > 31 or rs1v > 31 or rs2v > 31)
+//     return false;
+//   bits.opcode = 0x33;
+//   bits.rd = rdv & 0x1f;
+//   bits.funct3 = 7;//111
+//   bits.rs1 = rs1v & 0x1f;
+//   bits.rs2 = rs2v & 0x1f;
+//   bits.funct7 = 2;
+//   return true;
+// }
+
+bool
+RFormInst::encodeOrAnd(unsigned rdv, unsigned rs1v, unsigned rs2v)
+{
+  /* INSERT YOUR CODE FROM HERE */
+  if (rdv > 31 or rs1v > 31 or rs2v > 31)
+    return false;
+  bits.opcode = 0x33;
+  bits.rd = rdv & 0x1f;
+  bits.funct3 = 7;//110
+  bits.rs1 = rs1v & 0x1f;
+  bits.rs2 = rs2v & 0x1f;
+  bits.funct7 = 2;
+  return true;
+}
+
 /* YOUR CODE END HERE */
 
 bool

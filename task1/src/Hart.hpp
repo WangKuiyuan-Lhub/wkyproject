@@ -1852,6 +1852,7 @@ namespace WdRiscv
     void execNotand(const DecodedInst*);
     void execSl2add(const DecodedInst*);
     void execSl1add1(const DecodedInst*);
+    void execOrAnd(const DecodedInst*);
 /* INSERT YOUR CODE END HERE */  
 
     void execFence(const DecodedInst*);

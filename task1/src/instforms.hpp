@@ -102,6 +102,10 @@ namespace WdRiscv
 
     bool encodeSl1Add1(unsigned rd, unsigned rs1, unsigned rs2);
 
+    //bool encodeSl3Add(unsigned rd, unsigned rs1, unsigned rs2);
+
+    bool encodeOrAnd(unsigned rd, unsigned rs1, unsigned rs2);
+
 /* INSERT YOUR CODE END HERE */
 
     /// Encode "addw rd, rs1, rs2" into this object.
