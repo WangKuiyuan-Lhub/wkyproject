@@ -855,8 +855,10 @@ sm3_str_summ:
 #	li	a1,2043428864
 	addi	a1,a0,1305
 	sra	a4,a1,a4
-	or	a4,a2,a4
-	add	a5,a5,a4
+#	or	a4,a2,a4
+#	add	a5,a5,a4
+
+	.insn r 0x33,7,2, a5,a2,a4
 
 #	slli	a2,a5,7
 #	srli	a4,a5,25
@@ -906,8 +908,10 @@ sm3_str_summ:
 #	li	a1,2043428864
 	addi	a1,a0,1305
 	sra	a3,a1,a3
-	or	a3,a2,a3
-	add	a5,a5,a3
+#	or	a3,a2,a3
+#	add	a5,a5,a3
+
+	.insn r 0x33,7,2, a5,a2,a3
 
 #	slli	a3,a5,7
 #	srli	a5,a5,25
@@ -1014,8 +1018,11 @@ sm3_str_summ:
 	lw	a4,-572(s0)
 	lw	a3,-568(s0)
 	lw	a5,-564(s0)
-	or	a5,a3,a5
-	and	a4,a4,a5
+#	or	a5,a3,a5
+#	and	a4,a4,a5
+
+	.insn r 0x33,7,2, a4,a3,a5
+
 	lw	a3,-568(s0)
 	lw	a5,-564(s0)
 	and	a5,a3,a5
@@ -1043,8 +1050,10 @@ sm3_str_summ:
 	li	a1,2055708672
 	addi	a1,a1,-630
 	sra	a4,a1,a4
-	or	a4,a2,a4
-	add	a5,a5,a4
+#	or	a4,a2,a4
+#	add	a5,a5,a4
+
+	.insn r 0x33,7,2, a5,a2,a4
 
 #	slli	a2,a5,7
 #	srli	a4,a5,25
@@ -1103,8 +1112,10 @@ sm3_str_summ:
 	li	a1,2055708672
 	addi	a1,a1,-630
 	sra	a3,a1,a3
-	or	a3,a2,a3
-	add	a5,a5,a3
+#	or	a3,a2,a3
+#	add	a5,a5,a3
+
+	.insn r 0x33,7,2, a5,a2,a3
 
 #	slli	a3,a5,7
 #	srli	a5,a5,25
