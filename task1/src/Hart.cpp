@@ -1082,20 +1082,33 @@ Hart<URV>::execSl1add1(const DecodedInst* di)
   URV v = (u << 1) + 1 ;
   intRegs_.write(di->op0(),v);
 }
-//or a,rs1,rs2  and rs0,rs0,a
+
 template <typename URV>
 inline
 void
-Hart<URV>::execOrAnd(const DecodedInst* di)
+Hart<URV>::execSl3add(const DecodedInst* di)
 {
   /* INSERT YOUR CODE  HERE */  
-  uint32_t u = intRegs_.read(di->op0());
-  uint32_t v = intRegs_.read(di->op1());
+  uint32_t u = intRegs_.read(di->op1());
   uint32_t t = intRegs_.read(di->op2());
-
-  URV s = u & (v | t) ;
-  intRegs_.write(di->op0(),s);
+  URV v = u + (t << 3);
+  intRegs_.write(di->op0(),v);
 }
+
+//or a,rs1,rs2  and rs0,rs0,a
+// template <typename URV>
+// inline
+// void
+// Hart<URV>::execOrAnd(const DecodedInst* di)
+// {
+//   /* INSERT YOUR CODE  HERE */  
+//   uint32_t u = intRegs_.read(di->op0());
+//   uint32_t v = intRegs_.read(di->op1());
+//   uint32_t t = intRegs_.read(di->op2());
+
+//   URV s = u & (v | t) ;
+//   intRegs_.write(di->op0(),s);
+// }
 /* INSERT YOUR CODE END HERE */  
 
 template <typename URV>
@@ -6066,7 +6079,8 @@ Hart<URV>::execute(const DecodedInst* di)
      &&notand,
      &&sl2add,
      &&sl1add1,
-     &&orand,
+     &&sl3add,
+    // &&orand,
 /* INSERT YOUR CODE END HERE */ 
 
     };
@@ -6258,9 +6272,13 @@ Hart<URV>::execute(const DecodedInst* di)
   execSl1add1(di);
   return;
 
- orand:
-  execOrAnd(di);
+ sl3add:
+  execSl3add(di);
   return;
+
+//  orand:
+//   execOrAnd(di);
+//   return;
 /* INSERT YOUR CODE END HERE */  
 
  fence:

@@ -1843,8 +1843,8 @@ Hart<URV>::decode(uint32_t inst, uint32_t& op0, uint32_t& op1, uint32_t& op2,
       else if(funct3 == 4)  return instTable_.getEntry(InstId::notand);
       else if(funct3 == 5)  return instTable_.getEntry(InstId::sl2add);
       else if(funct3 == 6)  return instTable_.getEntry(InstId::sl1add1);
-      //else if(funct3 == 7)  return instTable_.getEntry(InstId::sl3add);
-      else if(funct3 == 7)  return instTable_.getEntry(InstId::orand);
+      else if(funct3 == 7)  return instTable_.getEntry(InstId::sl3add);
+      //else if(funct3 == 7)  return instTable_.getEntry(InstId::orand);
     }
   
   // else if(funct7 == 3){

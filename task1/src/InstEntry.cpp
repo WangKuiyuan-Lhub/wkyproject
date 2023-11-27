@@ -3930,17 +3930,17 @@ InstTable::setupInstVec()
 	OperandType::IntReg, OperandMode::Read, rs1Mask,
 	OperandType::IntReg, OperandMode::Read, rs2Mask },
 
-      // { "sl3add", InstId::sl3add, 0x4007033, top7Funct3Low7Mask,
-	// InstType::Int,
-	// OperandType::IntReg, OperandMode::Write, rdMask,
-	// OperandType::IntReg, OperandMode::Read, rs1Mask,
-	// OperandType::IntReg, OperandMode::Read, rs2Mask },
-
-      { "orand", InstId::orand, 0x4007033, top7Funct3Low7Mask,
+      { "sl3add", InstId::sl3add, 0x4007033, top7Funct3Low7Mask,
 	InstType::Int,
 	OperandType::IntReg, OperandMode::Write, rdMask,
 	OperandType::IntReg, OperandMode::Read, rs1Mask,
 	OperandType::IntReg, OperandMode::Read, rs2Mask },
+
+      // { "orand", InstId::orand, 0x4007033, top7Funct3Low7Mask,
+	// InstType::Int,
+	// OperandType::IntReg, OperandMode::Write, rdMask,
+	// OperandType::IntReg, OperandMode::Read, rs1Mask,
+	// OperandType::IntReg, OperandMode::Read, rs2Mask },
 
 /* INSERT YOUR CODE END HERE */ 
     };

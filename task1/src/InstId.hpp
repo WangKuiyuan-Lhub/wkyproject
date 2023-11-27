@@ -638,10 +638,10 @@ namespace WdRiscv
      notand,
      sl2add,
      sl1add1,
-     //sl3add,
-     orand,
+     sl3add,
+     //orand,
 /* INSERT YOUR CODE END HERE */ 
 //     maxId = notand,
-       maxId = orand,
+       maxId = sl3add,
     };
 }
